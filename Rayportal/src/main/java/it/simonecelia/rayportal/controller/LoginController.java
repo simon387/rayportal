@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import it.simonecelia.rayportal.model.Login;
+import it.simonecelia.rayportal.model.User;
 import it.simonecelia.rayportal.service.UserService;
 
 @Controller
@@ -31,7 +32,16 @@ public class LoginController {
 			  @ModelAttribute("login") Login login) {
 		  ModelAndView mav = null;
 		  
+		  User user = userService.validateUser(login);
 		  
+		  if (null != user) {
+			  mav = new ModelAndView("welcome");
+			  mav.addObject("firstname", user.getFirstname());
+		  }
+		  else {
+			  mav = new ModelAndView("login");
+			  mav.addObject("message", "Username or Password is wrong!!");
+		  }
 		  
 		  return mav;
 	  }
