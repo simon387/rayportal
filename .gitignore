@@ -2,3 +2,4 @@
 RemoteSystemsTempFiles/
 target/
 .recommenders
+.classpath.swp
